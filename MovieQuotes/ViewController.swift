@@ -7,12 +7,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+class ViewController: UITableViewController {
+    var names = ["Ray", "911","Dave", "shuai", "Ji"]
+    
+    override func tableView(_ tableView: UITableView, numberOfRowInSection sectioin: Int) -> Int {
+        //super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        return names.count
     }
+    
+    cellForRow
 
 
 }
