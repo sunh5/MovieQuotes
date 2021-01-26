@@ -9,7 +9,7 @@ import UIKit
 
 class MovieQuotesTabTableViewController: UITableViewController {
     var movieQuoteCellIdentifier = "MovieQuoteCell"
-//    var names = ["Ray", "911","Dave", "shuai", "Ji"]
+    //    var names = ["Ray", "911","Dave", "shuai", "Ji"]
     var movieQuotes = [MovieQuote]()
     
     override func viewDidLoad() {
@@ -21,7 +21,31 @@ class MovieQuotesTabTableViewController: UITableViewController {
     }
     
     @objc func showAddQuoteDialog(){
-        print("you press add button")
+        let alertController = UIAlertController(title: "Create a new mmovie quote", message: "", preferredStyle: .alert)
+        
+        alertController.addTextField{ (textField) in
+            textField.placeholder = "Quote"
+        }
+        alertController.addTextField{ (textField) in
+            textField.placeholder = "Movie"
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let submitAction = UIAlertAction(title: "Create Quote", style: .default){ (action) in
+            let quoteTextFields = alertController.textFields![0] as UITextField
+            let movieTextFields = alertController.textFields![1] as UITextField
+//            print(quoteTextFields.text!)
+//            print(movieTextFields.text!)
+            let newMovieQuote = MovieQuote(quote: quoteTextFields.text!, movie: movieTextFields.text!)
+            self.movieQuotes.insert(newMovieQuote, at: 0)
+            self.tableView.reloadData()
+        }
+        alertController.addAction(submitAction)
+        
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection sectioin: Int) -> Int {
@@ -38,6 +62,6 @@ class MovieQuotesTabTableViewController: UITableViewController {
         return cell
     }
     
-
-
+    
+    
 }
