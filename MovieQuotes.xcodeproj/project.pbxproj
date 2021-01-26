@@ -14,6 +14,7 @@
 		F9BC4D2E25A54F820018EB80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BC4D2C25A54F820018EB80 /* LaunchScreen.storyboard */; };
 		F9C6686525BFDC0100E5E101 /* MovieQuotesTabTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6686425BFDC0100E5E101 /* MovieQuotesTabTableViewController.swift */; };
 		F9C6686A25BFDE6800E5E101 /* MovieQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6686925BFDE6800E5E101 /* MovieQuote.swift */; };
+		F9C6687425C0026200E5E101 /* MovieQuoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6687325C0026200E5E101 /* MovieQuoteDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F9BC4D2F25A54F820018EB80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9C6686425BFDC0100E5E101 /* MovieQuotesTabTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuotesTabTableViewController.swift; sourceTree = "<group>"; };
 		F9C6686925BFDE6800E5E101 /* MovieQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuote.swift; sourceTree = "<group>"; };
+		F9C6687325C0026200E5E101 /* MovieQuoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuoteDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +62,13 @@
 			children = (
 				F9BC4D2125A54F7F0018EB80 /* AppDelegate.swift */,
 				F9BC4D2325A54F7F0018EB80 /* SceneDelegate.swift */,
+				F9C6686425BFDC0100E5E101 /* MovieQuotesTabTableViewController.swift */,
 				F9BC4D2725A54F7F0018EB80 /* Main.storyboard */,
 				F9BC4D2A25A54F820018EB80 /* Assets.xcassets */,
 				F9BC4D2C25A54F820018EB80 /* LaunchScreen.storyboard */,
 				F9BC4D2F25A54F820018EB80 /* Info.plist */,
-				F9C6686425BFDC0100E5E101 /* MovieQuotesTabTableViewController.swift */,
 				F9C6686925BFDE6800E5E101 /* MovieQuote.swift */,
+				F9C6687325C0026200E5E101 /* MovieQuoteDetailViewController.swift */,
 			);
 			path = MovieQuotes;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9C6687425C0026200E5E101 /* MovieQuoteDetailViewController.swift in Sources */,
 				F9C6686525BFDC0100E5E101 /* MovieQuotesTabTableViewController.swift in Sources */,
 				F9C6686A25BFDE6800E5E101 /* MovieQuote.swift in Sources */,
 				F9BC4D2225A54F7F0018EB80 /* AppDelegate.swift in Sources */,

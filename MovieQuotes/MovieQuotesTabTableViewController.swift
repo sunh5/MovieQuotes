@@ -9,7 +9,8 @@ import UIKit
 
 class MovieQuotesTabTableViewController: UITableViewController {
     var movieQuoteCellIdentifier = "MovieQuoteCell"
-    //    var names = ["Ray", "911","Dave", "shuai", "Ji"]
+    let DetailSegueIdentifier = "DetailSegue"
+    
     var movieQuotes = [MovieQuote]()
     
     override func viewDidLoad() {
@@ -19,6 +20,10 @@ class MovieQuotesTabTableViewController: UITableViewController {
         
         movieQuotes.append(MovieQuote(quote: "I be back", movie: "The ternimater"))
         movieQuotes.append(MovieQuote(quote: "Yo Ray", movie: "ROcky"))
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     @objc func showAddQuoteDialog(){
@@ -67,6 +72,14 @@ class MovieQuotesTabTableViewController: UITableViewController {
         if editingStyle == .delete{
             movieQuotes.remove(at: indexPath.row)
             tableView.reloadData()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == DetailSegueIdentifier{
+            if let indexPath = tableView.indexPathForSelectedRow{
+                (segue.destination as! MovieQuoteDetailViewController).movieQuote = movieQuotes[indexPath.row]
+            }
         }
     }
     
