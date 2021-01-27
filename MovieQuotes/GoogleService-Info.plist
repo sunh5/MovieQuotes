@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1066145073119-nb25sequmgmr684kgu27840hot7f9mb9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1066145073119-nb25sequmgmr684kgu27840hot7f9mb9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAceunI5K5p0tosCpvEqL-wr34ZHGSltxE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1066145073119</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>edu.rose-hulman.sunh5.MovieQuotes</string>
+	<key>PROJECT_ID</key>
+	<string>ios-movie-quote</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ios-movie-quote.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1066145073119:ios:8aa05e3f6308928f84e66a</string>
+	<key>DATABASE_URL</key>
+	<string>https://ios-movie-quote-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
