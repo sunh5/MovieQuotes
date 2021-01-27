@@ -12,7 +12,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
     var movieQuoteCellIdentifier = "MovieQuoteCell"
     let DetailSegueIdentifier = "DetailSegue"
     var movieQuotRef: CollectionReference!
-    
+    var quotesListener: ListenerRegistration!
     var movieQuotes = [MovieQuote]()
     
     override func viewDidLoad() {
@@ -28,12 +28,12 @@ class MovieQuotesTabTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
         
-        movieQuotRef.addSnapshotListener { (querySnapshot, error) in
+        quotesListener = movieQuotRef.order(by: "created", descending: true).limit(to:50).addSnapshotListener { (querySnapshot, error) in
             if let querySnapshot = querySnapshot{
                 self.movieQuotes.removeAll()
                 querySnapshot.documents.forEach { (documentSnapshot) in
-                    print(documentSnapshot.documentID)
-                    print(documentSnapshot.data())
+//                    print(documentSnapshot.documentID)
+//                    print(documentSnapshot.data())
                     self.movieQuotes.append(MovieQuote(documentSnapshot: documentSnapshot))
                 }
                 self.tableView.reloadData()
@@ -42,6 +42,10 @@ class MovieQuotesTabTableViewController: UITableViewController {
                 return
             }
         }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        quotesListener.remove()
     }
     
     @objc func showAddQuoteDialog(){
@@ -62,9 +66,14 @@ class MovieQuotesTabTableViewController: UITableViewController {
             let movieTextFields = alertController.textFields![1] as UITextField
 //            print(quoteTextFields.text!)
 //            print(movieTextFields.text!)
-            let newMovieQuote = MovieQuote(quote: quoteTextFields.text!, movie: movieTextFields.text!)
-            self.movieQuotes.insert(newMovieQuote, at: 0)
-            self.tableView.reloadData()
+//            let newMovieQuote = MovieQuote(quote: quoteTextFields.text!, movie: movieTextFields.text!)
+//            self.movieQuotes.insert(newMovieQuote, at: 0)
+//            self.tableView.reloadData()
+            self.movieQuotRef.addDocument(data: [
+                "quote": quoteTextFields.text!,
+                "movie": movieTextFields.text!,
+                "created": Timestamp.init()
+            ])
         }
         alertController.addAction(submitAction)
         
