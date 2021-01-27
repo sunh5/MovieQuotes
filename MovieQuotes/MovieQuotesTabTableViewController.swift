@@ -12,7 +12,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
     var movieQuoteCellIdentifier = "MovieQuoteCell"
     let DetailSegueIdentifier = "DetailSegue"
     var movieQuotRef: CollectionReference!
-    var quotesListener: ListenerRegistration!
+    var MovieQuotesListener: ListenerRegistration!
     var movieQuotes = [MovieQuote]()
     
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
         
-        quotesListener = movieQuotRef.order(by: "created", descending: true).limit(to:50).addSnapshotListener { (querySnapshot, error) in
+        MovieQuotesListener = movieQuotRef.order(by: "created", descending: true).limit(to:50).addSnapshotListener { (querySnapshot, error) in
             if let querySnapshot = querySnapshot{
                 self.movieQuotes.removeAll()
                 querySnapshot.documents.forEach { (documentSnapshot) in
@@ -45,7 +45,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        quotesListener.remove()
+        MovieQuotesListener.remove()
     }
     
     @objc func showAddQuoteDialog(){
@@ -97,15 +97,18 @@ class MovieQuotesTabTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-            movieQuotes.remove(at: indexPath.row)
-            tableView.reloadData()
+//            movieQuotes.remove(at: indexPath.row)
+//            tableView.reloadData()
+            let movieQuoteToDelete = movieQuotes[indexPath.row]
+            movieQuotRef.document(movieQuoteToDelete.id!).delete()
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == DetailSegueIdentifier{
             if let indexPath = tableView.indexPathForSelectedRow{
-                (segue.destination as! MovieQuoteDetailViewController).movieQuote = movieQuotes[indexPath.row]
+//                (segue.destination as! MovieQuoteDetailViewController).movieQuote = movieQuotes[indexPath.row]
+                (segue.destination as! MovieQuoteDetailViewController).movieQuoteRef = movieQuotRef.document(movieQuotes[indexPath.row].id!)
             }
         }
     }
