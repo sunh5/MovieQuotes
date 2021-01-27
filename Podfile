@@ -6,7 +6,7 @@ target 'MovieQuotes' do
   use_frameworks!
 
   # Pods for MovieQuotes
-  
+  pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
 
 end

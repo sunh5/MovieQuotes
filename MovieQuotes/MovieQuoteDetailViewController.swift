@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class MovieQuoteDetailViewController: UIViewController {
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var movieLabel: UILabel!
