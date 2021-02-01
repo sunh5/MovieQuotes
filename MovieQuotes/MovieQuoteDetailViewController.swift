@@ -18,7 +18,7 @@ class MovieQuoteDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(showEditDialog))
+// Remove down       navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(showEditDialog))
     }
     @objc func showEditDialog(){
         let alertController = UIAlertController(title: "Edit this mmovie quote", message: "", preferredStyle: .alert)
@@ -62,8 +62,15 @@ class MovieQuoteDetailViewController: UIViewController {
                 print("Go back to list")
                 return
             }
-            
             self.movieQuote = MovieQuote(documentSnapshot: documentSnapshot!)
+            //Decide if we can edit or not
+            if (Auth.auth().currentUser!.uid == self.movieQuote?.author){
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(self.showEditDialog))
+            }else {
+                self.navigationItem.rightBarButtonItem = nil
+            }
+            
+
             self.updateView()
         }
 //        updateView()

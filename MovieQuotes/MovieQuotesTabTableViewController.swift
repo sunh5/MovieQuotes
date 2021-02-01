@@ -13,16 +13,33 @@ class MovieQuotesTabTableViewController: UITableViewController {
     let DetailSegueIdentifier = "DetailSegue"
     var movieQuotRef: CollectionReference!
     var MovieQuotesListener: ListenerRegistration!
+    var isShowingAllQuotes = true
     var movieQuotes = [MovieQuote]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddQuoteDialog))
-        
-//        movieQuotes.append(MovieQuote(quote: "I be back", movie: "The ternimater"))
-//        movieQuotes.append(MovieQuote(quote: "Yo Ray", movie: "ROcky"))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddQuoteDialog))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Menu", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showMenu))
         movieQuotRef = Firestore.firestore().collection("MovieQuotes")
+    }
+    @objc func showMenu(){
+        let alertController = UIAlertController(title: nil,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Create Quote",
+                                                style: .default){ (action) in
+                                                self.showAddQuoteDialog()
+                                                })
+        alertController.addAction(UIAlertAction(title: self.isShowingAllQuotes ? "Show only my quotes" : "Show all quotes",
+                                                style: .default){ (action) in
+                                                self.isShowingAllQuotes = !self.isShowingAllQuotes
+                                                //Update the list
+                                                self.startListening()
+                                                })
+        alertController.addAction( UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,9 +57,18 @@ class MovieQuotesTabTableViewController: UITableViewController {
             print("you are signed in")
         }
         
-        
-//        tableView.reloadData()
-        MovieQuotesListener = movieQuotRef.order(by: "created", descending: true).limit(to:50).addSnapshotListener { (querySnapshot, error) in
+        startListening()
+    }
+    
+    func startListening(){
+        if (MovieQuotesListener != nil){
+            MovieQuotesListener.remove()
+        }
+        var query = movieQuotRef.order(by: "created", descending: true).limit(to:50)
+        if (!isShowingAllQuotes){
+            query = query.whereField("author", isEqualTo: Auth.auth().currentUser!.uid)
+        }
+        MovieQuotesListener = query.addSnapshotListener { (querySnapshot, error) in
             if let querySnapshot = querySnapshot{
                 self.movieQuotes.removeAll()
                 querySnapshot.documents.forEach { (documentSnapshot) in
@@ -63,7 +89,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
         MovieQuotesListener.remove()
     }
     
-    @objc func showAddQuoteDialog(){
+    func showAddQuoteDialog(){
         let alertController = UIAlertController(title: "Create a new mmovie quote", message: "", preferredStyle: .alert)
         
         alertController.addTextField{ (textField) in
