@@ -26,8 +26,22 @@ class MovieQuotesTabTableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
         
+        if (Auth.auth().currentUser == nil){
+            print("signing in")//not signed
+            Auth.auth().signInAnonymously { (AuthResult, error) in
+                if let error = error{
+                    print ("Error with anonymous auth \(error)")
+                    return
+                }
+                print("Success sign in")
+            }
+        }else {
+            print("you are signed in")
+        }
+        
+        
+//        tableView.reloadData()
         MovieQuotesListener = movieQuotRef.order(by: "created", descending: true).limit(to:50).addSnapshotListener { (querySnapshot, error) in
             if let querySnapshot = querySnapshot{
                 self.movieQuotes.removeAll()
@@ -43,6 +57,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
             }
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         MovieQuotesListener.remove()
@@ -64,19 +79,18 @@ class MovieQuotesTabTableViewController: UITableViewController {
         let submitAction = UIAlertAction(title: "Create Quote", style: .default){ (action) in
             let quoteTextFields = alertController.textFields![0] as UITextField
             let movieTextFields = alertController.textFields![1] as UITextField
-//            print(quoteTextFields.text!)
-//            print(movieTextFields.text!)
+
 //            let newMovieQuote = MovieQuote(quote: quoteTextFields.text!, movie: movieTextFields.text!)
 //            self.movieQuotes.insert(newMovieQuote, at: 0)
 //            self.tableView.reloadData()
             self.movieQuotRef.addDocument(data: [
                 "quote": quoteTextFields.text!,
                 "movie": movieTextFields.text!,
-                "created": Timestamp.init()
+                "created": Timestamp.init(),
+                "author": Auth.auth().currentUser!.uid
             ])
         }
         alertController.addAction(submitAction)
-        
         
         present(alertController, animated: true, completion: nil)
     }
@@ -93,6 +107,11 @@ class MovieQuotesTabTableViewController: UITableViewController {
         cell.detailTextLabel?.text = movieQuotes[indexPath.row].movie
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let movieQuote = movieQuotes[indexPath.row]
+        return Auth.auth().currentUser!.uid == movieQuote.author
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

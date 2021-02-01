@@ -8,5 +8,5 @@ target 'MovieQuotes' do
   # Pods for MovieQuotes
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
-
+  pod 'Firebase/Auth'
 end
