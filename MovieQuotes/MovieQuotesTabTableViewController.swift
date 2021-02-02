@@ -19,7 +19,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = editButtonItem
+//        navigationItem.leftBarButtonItem = editButtonItem
         //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddQuoteDialog))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Menu", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showMenu))
         movieQuotRef = Firestore.firestore().collection("MovieQuotes")
@@ -143,7 +143,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         let movieQuote = movieQuotes[indexPath.row]
-        return Auth.auth().currentUser!.uid == movieQuote.author
+        return Auth.auth().currentUser?.uid == movieQuote.author
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

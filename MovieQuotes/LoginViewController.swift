@@ -8,10 +8,12 @@
 import UIKit
 import Firebase
 import Rosefire
+import GoogleSignIn
 
 class LoginViewController: UIViewController{
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet weak var signInButton: GIDSignInButton!
     let showListSegueIndentifier = "ShowListSegue"
     let REGISTRY_TOKEN = "1409f402-7717-42bf-b09b-75f33c423b04"//
     
@@ -19,6 +21,8 @@ class LoginViewController: UIViewController{
         super.viewDidLoad()
         emailTextField.placeholder = "Email"
         passwordTextField.placeholder = "Password"
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        self.signInButton?.style = .wide
     }
     
     override func viewDidAppear(_ animated: Bool) {                             //Auto login
@@ -68,13 +72,14 @@ class LoginViewController: UIViewController{
           print("Result = \(result!.email!)")
           print("Result = \(result!.group!)")
             
-//          Auth.auth().signIn(withCustomToken: result!.token) { (authResult, error) in
-//            if let error = error {
-//              print("Firebase sign in error! \(error)")
-//              return
-//            }
-//            // User is signed in using Firebase!
-//          }
+          Auth.auth().signIn(withCustomToken: result!.token) { (authResult, error) in
+            if let error = error {
+              print("Firebase sign in error! \(error)")
+              return
+            }
+            // User is signed in using Firebase!
+            self.performSegue(withIdentifier: self.showListSegueIndentifier, sender: self)
+          }
         }
 
     }
