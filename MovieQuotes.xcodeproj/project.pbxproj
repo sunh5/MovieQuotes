@@ -11,6 +11,7 @@
 		F9416AE425C9586900003E5D /* SideNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AE325C9586900003E5D /* SideNavController.swift */; };
 		F9416AE725C9619300003E5D /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AE625C9619300003E5D /* ProfilePageViewController.swift */; };
 		F9416AEA25C9645300003E5D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AE925C9645300003E5D /* Constants.swift */; };
+		F9416AEE25C9667100003E5D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AED25C9667100003E5D /* UserManager.swift */; };
 		F99CF50E25C8CC1800460B41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99CF50D25C8CC1800460B41 /* LoginViewController.swift */; };
 		F9BC4D2225A54F7F0018EB80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BC4D2125A54F7F0018EB80 /* AppDelegate.swift */; };
 		F9BC4D2425A54F7F0018EB80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BC4D2325A54F7F0018EB80 /* SceneDelegate.swift */; };
@@ -30,6 +31,7 @@
 		F9416AE325C9586900003E5D /* SideNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideNavController.swift; sourceTree = "<group>"; };
 		F9416AE625C9619300003E5D /* ProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		F9416AE925C9645300003E5D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F9416AED25C9667100003E5D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		F99CF50D25C8CC1800460B41 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F9BC4D1E25A54F7F0018EB80 /* MovieQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BC4D2125A54F7F0018EB80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,17 +99,18 @@
 				F9C6688025C160A200E5E101 /* GoogleService-Info.plist */,
 				F9BC4D2125A54F7F0018EB80 /* AppDelegate.swift */,
 				F9BC4D2325A54F7F0018EB80 /* SceneDelegate.swift */,
-				F9C6686425BFDC0100E5E101 /* MovieQuotesTabTableViewController.swift */,
 				F9BC4D2725A54F7F0018EB80 /* Main.storyboard */,
 				F9BC4D2A25A54F820018EB80 /* Assets.xcassets */,
 				F9BC4D2C25A54F820018EB80 /* LaunchScreen.storyboard */,
 				F9BC4D2F25A54F820018EB80 /* Info.plist */,
+				F9C6686425BFDC0100E5E101 /* MovieQuotesTabTableViewController.swift */,
 				F9C6686925BFDE6800E5E101 /* MovieQuote.swift */,
 				F9C6687325C0026200E5E101 /* MovieQuoteDetailViewController.swift */,
 				F99CF50D25C8CC1800460B41 /* LoginViewController.swift */,
 				F9416AE325C9586900003E5D /* SideNavController.swift */,
 				F9416AE625C9619300003E5D /* ProfilePageViewController.swift */,
 				F9416AE925C9645300003E5D /* Constants.swift */,
+				F9416AED25C9667100003E5D /* UserManager.swift */,
 			);
 			path = MovieQuotes;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				F9C6686A25BFDE6800E5E101 /* MovieQuote.swift in Sources */,
 				F9BC4D2225A54F7F0018EB80 /* AppDelegate.swift in Sources */,
 				F9BC4D2425A54F7F0018EB80 /* SceneDelegate.swift in Sources */,
+				F9416AEE25C9667100003E5D /* UserManager.swift in Sources */,
 				F9416AE725C9619300003E5D /* ProfilePageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,6 +14,8 @@ class LoginViewController: UIViewController{
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: GIDSignInButton!
+    var roseFireName: String?
+        
     let showListSegueIndentifier = "ShowListSegue"
     let REGISTRY_TOKEN = "1409f402-7717-42bf-b09b-75f33c423b04"//
     
@@ -23,6 +25,7 @@ class LoginViewController: UIViewController{
         passwordTextField.placeholder = "Password"
         GIDSignIn.sharedInstance()?.presentingViewController = self
         self.signInButton?.style = .wide
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {                             //Auto login
@@ -31,6 +34,7 @@ class LoginViewController: UIViewController{
             print("Someone already signed in! Just move on")
             self.performSegue(withIdentifier: self.showListSegueIndentifier, sender: self)
         }
+        roseFireName = nil
     }
     @IBAction func pressedSignInNewUser (_ sender: Any){
         let email = emailTextField.text!
@@ -69,6 +73,7 @@ class LoginViewController: UIViewController{
           print("Result = \(result!.token!)")
           print("Result = \(result!.username!)")
           print("Result = \(result!.name!)")
+            self.roseFireName = result!.name!
           print("Result = \(result!.email!)")
           print("Result = \(result!.group!)")
             
@@ -82,6 +87,16 @@ class LoginViewController: UIViewController{
           }
         }
 
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if segue.identifier == showListSegueIndentifier{
+            
+            print("Checking for user \(Auth.auth().currentUser!.uid)")
+            UserManage.shared.addNewUserMaybe(uid: Auth.auth().currentUser!.uid,
+                                              name: Auth.auth().currentUser!.displayName,
+                                              photoUrl: Auth.auth().currentUser!.photoURL?.absoluteString)
+        }
     }
     
 }
