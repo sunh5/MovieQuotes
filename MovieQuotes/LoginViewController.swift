@@ -93,7 +93,7 @@ class LoginViewController: UIViewController{
         if segue.identifier == showListSegueIndentifier{
             
             print("Checking for user \(Auth.auth().currentUser!.uid)")
-            UserManage.shared.addNewUserMaybe(uid: Auth.auth().currentUser!.uid,
+            UserManager.shared.addNewUserMaybe(uid: Auth.auth().currentUser!.uid,
                                               name: Auth.auth().currentUser!.displayName,
                                               photoUrl: Auth.auth().currentUser!.photoURL?.absoluteString)
         }

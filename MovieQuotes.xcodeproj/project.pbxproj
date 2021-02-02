@@ -12,6 +12,7 @@
 		F9416AE725C9619300003E5D /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AE625C9619300003E5D /* ProfilePageViewController.swift */; };
 		F9416AEA25C9645300003E5D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AE925C9645300003E5D /* Constants.swift */; };
 		F9416AEE25C9667100003E5D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AED25C9667100003E5D /* UserManager.swift */; };
+		F9416AF225C9D29B00003E5D /* ImgeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AF125C9D29B00003E5D /* ImgeUtils.swift */; };
 		F99CF50E25C8CC1800460B41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99CF50D25C8CC1800460B41 /* LoginViewController.swift */; };
 		F9BC4D2225A54F7F0018EB80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BC4D2125A54F7F0018EB80 /* AppDelegate.swift */; };
 		F9BC4D2425A54F7F0018EB80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BC4D2325A54F7F0018EB80 /* SceneDelegate.swift */; };
@@ -32,6 +33,7 @@
 		F9416AE625C9619300003E5D /* ProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		F9416AE925C9645300003E5D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F9416AED25C9667100003E5D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		F9416AF125C9D29B00003E5D /* ImgeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgeUtils.swift; sourceTree = "<group>"; };
 		F99CF50D25C8CC1800460B41 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F9BC4D1E25A54F7F0018EB80 /* MovieQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BC4D2125A54F7F0018EB80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				F9416AE625C9619300003E5D /* ProfilePageViewController.swift */,
 				F9416AE925C9645300003E5D /* Constants.swift */,
 				F9416AED25C9667100003E5D /* UserManager.swift */,
+				F9416AF125C9D29B00003E5D /* ImgeUtils.swift */,
 			);
 			path = MovieQuotes;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				F9BC4D2225A54F7F0018EB80 /* AppDelegate.swift in Sources */,
 				F9BC4D2425A54F7F0018EB80 /* SceneDelegate.swift in Sources */,
 				F9416AEE25C9667100003E5D /* UserManager.swift in Sources */,
+				F9416AF225C9D29B00003E5D /* ImgeUtils.swift in Sources */,
 				F9416AE725C9619300003E5D /* ProfilePageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

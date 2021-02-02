@@ -12,12 +12,12 @@ let kCollectionUsers = "Users"
 let kKeyName = "name"
 let kPhotoUrl = "photoUrl"
 
-class UserManage {
+class UserManager {
     var _collectionRef: CollectionReference
     var _document: DocumentSnapshot?
     var _userListener: ListenerRegistration?
     
-    static let shared = UserManage()
+    static let shared = UserManager()
     private init() {
         _collectionRef = Firestore.firestore().collection(kCollectionUsers)
     }
@@ -85,6 +85,13 @@ class UserManage {
     var name: String{
        
         if let value = _document?.get(kKeyName){
+            return value as! String
+        }
+        return ""
+    }
+    var photoUrl: String{
+       
+        if let value = _document?.get(kPhotoUrl){
             return value as! String
         }
         return ""
