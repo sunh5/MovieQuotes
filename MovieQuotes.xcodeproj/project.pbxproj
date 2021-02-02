@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		BE1FB85F995DD223D2AE782C /* Pods_MovieQuotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C4104D2A9C7B645C4654CF /* Pods_MovieQuotes.framework */; };
+		F9416AE425C9586900003E5D /* SideNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AE325C9586900003E5D /* SideNavController.swift */; };
+		F9416AE725C9619300003E5D /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AE625C9619300003E5D /* ProfilePageViewController.swift */; };
+		F9416AEA25C9645300003E5D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9416AE925C9645300003E5D /* Constants.swift */; };
 		F99CF50E25C8CC1800460B41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99CF50D25C8CC1800460B41 /* LoginViewController.swift */; };
 		F9BC4D2225A54F7F0018EB80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BC4D2125A54F7F0018EB80 /* AppDelegate.swift */; };
 		F9BC4D2425A54F7F0018EB80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BC4D2325A54F7F0018EB80 /* SceneDelegate.swift */; };
@@ -24,6 +27,9 @@
 		24C4104D2A9C7B645C4654CF /* Pods_MovieQuotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieQuotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		451ACA0968D21888ABB832A2 /* Pods-MovieQuotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieQuotes.release.xcconfig"; path = "Target Support Files/Pods-MovieQuotes/Pods-MovieQuotes.release.xcconfig"; sourceTree = "<group>"; };
 		4EB5856E4C0A352D24DF7D6A /* Pods-MovieQuotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieQuotes.debug.xcconfig"; path = "Target Support Files/Pods-MovieQuotes/Pods-MovieQuotes.debug.xcconfig"; sourceTree = "<group>"; };
+		F9416AE325C9586900003E5D /* SideNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideNavController.swift; sourceTree = "<group>"; };
+		F9416AE625C9619300003E5D /* ProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
+		F9416AE925C9645300003E5D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F99CF50D25C8CC1800460B41 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F9BC4D1E25A54F7F0018EB80 /* MovieQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BC4D2125A54F7F0018EB80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +105,9 @@
 				F9C6686925BFDE6800E5E101 /* MovieQuote.swift */,
 				F9C6687325C0026200E5E101 /* MovieQuoteDetailViewController.swift */,
 				F99CF50D25C8CC1800460B41 /* LoginViewController.swift */,
+				F9416AE325C9586900003E5D /* SideNavController.swift */,
+				F9416AE625C9619300003E5D /* ProfilePageViewController.swift */,
+				F9416AE925C9645300003E5D /* Constants.swift */,
 			);
 			path = MovieQuotes;
 			sourceTree = "<group>";
@@ -237,11 +246,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F99CF50E25C8CC1800460B41 /* LoginViewController.swift in Sources */,
+				F9416AEA25C9645300003E5D /* Constants.swift in Sources */,
+				F9416AE425C9586900003E5D /* SideNavController.swift in Sources */,
 				F9C6687425C0026200E5E101 /* MovieQuoteDetailViewController.swift in Sources */,
 				F9C6686525BFDC0100E5E101 /* MovieQuotesTabTableViewController.swift in Sources */,
 				F9C6686A25BFDE6800E5E101 /* MovieQuote.swift in Sources */,
 				F9BC4D2225A54F7F0018EB80 /* AppDelegate.swift in Sources */,
 				F9BC4D2425A54F7F0018EB80 /* SceneDelegate.swift in Sources */,
+				F9416AE725C9619300003E5D /* ProfilePageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,36 +20,37 @@ class MovieQuotesTabTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        navigationItem.leftBarButtonItem = editButtonItem
-        //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddQuoteDialog))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Menu", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showMenu))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddQuoteDialog))
+        
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Menu", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showMenu))
         movieQuotRef = Firestore.firestore().collection("MovieQuotes")
     }
-    @objc func showMenu(){
-        let alertController = UIAlertController(title: nil,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Create Quote",
-                                                style: .default){ (action) in
-                                                self.showAddQuoteDialog()
-        })
-        alertController.addAction(UIAlertAction(title: self.isShowingAllQuotes ? "Show only my quotes" : "Show all quotes",
-                                                style: .default){ (action) in
-                                                self.isShowingAllQuotes = !self.isShowingAllQuotes
-                                                //Update the list
-                                                self.startListening()
-        })
-        alertController.addAction(UIAlertAction(title: "Sign out",
-                                                style: .default){ (action) in
-                                                do{
-                                                    try Auth.auth().signOut()
-                                                }catch {
-                                                    print("Sign out error")
-                                                }
-        })
-        alertController.addAction( UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(alertController, animated: true, completion: nil)
-    }
+//    @objc func showMenu(){
+//        let alertController = UIAlertController(title: nil,
+//                                                message: nil,
+//                                                preferredStyle: .actionSheet)
+//        alertController.addAction(UIAlertAction(title: "Create Quote",
+//                                                style: .default){ (action) in
+//                                                self.showAddQuoteDialog()
+//        })
+//        alertController.addAction(UIAlertAction(title: self.isShowingAllQuotes ? "Show only my quotes" : "Show all quotes",
+//                                                style: .default){ (action) in
+//                                                self.isShowingAllQuotes = !self.isShowingAllQuotes
+//                                                //Update the list
+//                                                self.startListening()
+//        })
+//        alertController.addAction(UIAlertAction(title: "Sign out",
+//                                                style: .default){ (action) in
+//                                                do{
+//                                                    try Auth.auth().signOut()
+//                                                }catch {
+//                                                    print("Sign out error")
+//                                                }
+//        })
+//        alertController.addAction( UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//
+//        present(alertController, animated: true, completion: nil)
+//    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -95,7 +96,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
         Auth.auth().removeStateDidChangeListener( authStateListenerHandle)
     }
     
-    func showAddQuoteDialog(){
+    @objc func showAddQuoteDialog(){
         let alertController = UIAlertController(title: "Create a new mmovie quote", message: "", preferredStyle: .alert)
         
         alertController.addTextField{ (textField) in
