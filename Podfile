@@ -13,4 +13,5 @@ target 'MovieQuotes' do
   pod 'GoogleSignIn'
   pod 'SideMenu'
   pod 'Kingfisher'
+  pod 'Firebase/Storage'
 end

@@ -7,8 +7,9 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
-class ProfilePageViewController: UIViewController{
+class ProfilePageViewController: UIViewController {
     @IBOutlet weak var profilePhotoImageView: UIImageView!
     @IBOutlet weak var displayNameTextField: UITextField!
     
@@ -26,7 +27,17 @@ class ProfilePageViewController: UIViewController{
     }
     
     @IBAction func pressedEditPhoto(_ sender: Any) {
-        print("Send photo")
+        let imagePicerControler = UIImagePickerController()
+        imagePicerControler.delegate = self
+        imagePicerControler.allowsEditing = true
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            print("You must be on a device")
+            imagePicerControler.sourceType = .camera
+        }else{
+            print("You must be on a simulator")
+            imagePicerControler.sourceType = .photoLibrary
+        }
+        present(imagePicerControler, animated: true, completion: nil)
     }
     
     @objc func handleNameEdit(){
@@ -41,5 +52,61 @@ class ProfilePageViewController: UIViewController{
         
         //Figure out how to load Image
         ImageUtils.load(imageView: profilePhotoImageView, from: UserManager.shared.photoUrl)
+    }
+    
+    func uploadImage(_ image: UIImage){
+        if let imageData = ImageUtils.resize(image: image){
+            // Create a storage reference from our storage service
+            let storageRef = Storage.storage().reference().child(kCollectionUsers).child(Auth.auth().currentUser!.uid)
+            
+            let uploadTask = storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+                if let error = error {
+                    print("Error upload data\(error)")
+                    return
+                }
+                print("upload complete")
+                //                guard let metadata = metadata else {
+                
+                
+                
+                // You can also access to download URL after upload.
+                storageRef.downloadURL { (url, error) in
+                    if let error = error {
+                        print("Error upload data\(error)")
+                        return
+                    }
+                    if let downloadURL = url {
+                        print("Got the download url \(downloadURL)")
+                        
+                        UserManager.shared.updatePhotoUrl(photoUrl: downloadURL.absoluteString)
+                    }
+                }
+                
+                
+                
+            }
+            
+        }else {
+            print("Error getting iamge data")
+        }
+    }
+}
+
+extension ProfilePageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as! UIImage? {
+//            profilePhotoImageView.image = image
+            uploadImage(image)
+        }else if let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage? {
+//            profilePhotoImageView.image = image
+            uploadImage(image)
+        }
+        
+        picker.dismiss(animated: true)
     }
 }
