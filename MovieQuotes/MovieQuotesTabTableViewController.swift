@@ -13,13 +13,14 @@ class MovieQuotesTabTableViewController: UITableViewController {
     let DetailSegueIdentifier = "DetailSegue"
     var movieQuotRef: CollectionReference!
     var MovieQuotesListener: ListenerRegistration!
+    var authStateListenerHandle: AuthStateDidChangeListenerHandle!
     var isShowingAllQuotes = true
     var movieQuotes = [MovieQuote]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddQuoteDialog))
+        //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddQuoteDialog))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Menu", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showMenu))
         movieQuotRef = Firestore.firestore().collection("MovieQuotes")
     }
@@ -30,13 +31,21 @@ class MovieQuotesTabTableViewController: UITableViewController {
         alertController.addAction(UIAlertAction(title: "Create Quote",
                                                 style: .default){ (action) in
                                                 self.showAddQuoteDialog()
-                                                })
+        })
         alertController.addAction(UIAlertAction(title: self.isShowingAllQuotes ? "Show only my quotes" : "Show all quotes",
                                                 style: .default){ (action) in
                                                 self.isShowingAllQuotes = !self.isShowingAllQuotes
                                                 //Update the list
                                                 self.startListening()
-                                                })
+        })
+        alertController.addAction(UIAlertAction(title: "Sign out",
+                                                style: .default){ (action) in
+                                                do{
+                                                    try Auth.auth().signOut()
+                                                }catch {
+                                                    print("Sign out error")
+                                                }
+        })
         alertController.addAction( UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alertController, animated: true, completion: nil)
@@ -44,17 +53,13 @@ class MovieQuotesTabTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if (Auth.auth().currentUser == nil){
-            print("signing in")//not signed
-            Auth.auth().signInAnonymously { (AuthResult, error) in
-                if let error = error{
-                    print ("Error with anonymous auth \(error)")
-                    return
-                }
-                print("Success sign in")
+        authStateListenerHandle = Auth.auth().addStateDidChangeListener{(auth, user) in
+            if (Auth.auth().currentUser == nil){
+                print("There is no user, Go back to sign in ")
+                self.navigationController?.popViewController(animated: true)
+            }else {
+                print("You are signed in already")
             }
-        }else {
-            print("you are signed in")
         }
         
         startListening()
@@ -72,8 +77,8 @@ class MovieQuotesTabTableViewController: UITableViewController {
             if let querySnapshot = querySnapshot{
                 self.movieQuotes.removeAll()
                 querySnapshot.documents.forEach { (documentSnapshot) in
-//                    print(documentSnapshot.documentID)
-//                    print(documentSnapshot.data())
+                    //                    print(documentSnapshot.documentID)
+                    //                    print(documentSnapshot.data())
                     self.movieQuotes.append(MovieQuote(documentSnapshot: documentSnapshot))
                 }
                 self.tableView.reloadData()
@@ -87,6 +92,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         MovieQuotesListener.remove()
+        Auth.auth().removeStateDidChangeListener( authStateListenerHandle)
     }
     
     func showAddQuoteDialog(){
@@ -105,10 +111,10 @@ class MovieQuotesTabTableViewController: UITableViewController {
         let submitAction = UIAlertAction(title: "Create Quote", style: .default){ (action) in
             let quoteTextFields = alertController.textFields![0] as UITextField
             let movieTextFields = alertController.textFields![1] as UITextField
-
-//            let newMovieQuote = MovieQuote(quote: quoteTextFields.text!, movie: movieTextFields.text!)
-//            self.movieQuotes.insert(newMovieQuote, at: 0)
-//            self.tableView.reloadData()
+            
+            //            let newMovieQuote = MovieQuote(quote: quoteTextFields.text!, movie: movieTextFields.text!)
+            //            self.movieQuotes.insert(newMovieQuote, at: 0)
+            //            self.tableView.reloadData()
             self.movieQuotRef.addDocument(data: [
                 "quote": quoteTextFields.text!,
                 "movie": movieTextFields.text!,
@@ -142,8 +148,8 @@ class MovieQuotesTabTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-//            movieQuotes.remove(at: indexPath.row)
-//            tableView.reloadData()
+            //            movieQuotes.remove(at: indexPath.row)
+            //            tableView.reloadData()
             let movieQuoteToDelete = movieQuotes[indexPath.row]
             movieQuotRef.document(movieQuoteToDelete.id!).delete()
         }
@@ -152,7 +158,7 @@ class MovieQuotesTabTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == DetailSegueIdentifier{
             if let indexPath = tableView.indexPathForSelectedRow{
-//                (segue.destination as! MovieQuoteDetailViewController).movieQuote = movieQuotes[indexPath.row]
+                //                (segue.destination as! MovieQuoteDetailViewController).movieQuote = movieQuotes[indexPath.row]
                 (segue.destination as! MovieQuoteDetailViewController).movieQuoteRef = movieQuotRef.document(movieQuotes[indexPath.row].id!)
             }
         }
