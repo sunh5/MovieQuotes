@@ -73,7 +73,7 @@ class LoginViewController: UIViewController{
           print("Result = \(result!.token!)")
           print("Result = \(result!.username!)")
           print("Result = \(result!.name!)")
-            self.roseFireName = result!.name!
+          self.roseFireName = result!.name!
           print("Result = \(result!.email!)")
           print("Result = \(result!.group!)")
             
