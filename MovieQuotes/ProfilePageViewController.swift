@@ -65,9 +65,6 @@ class ProfilePageViewController: UIViewController {
                     return
                 }
                 print("upload complete")
-                //                guard let metadata = metadata else {
-                
-                
                 
                 // You can also access to download URL after upload.
                 storageRef.downloadURL { (url, error) in
@@ -77,14 +74,12 @@ class ProfilePageViewController: UIViewController {
                     }
                     if let downloadURL = url {
                         print("Got the download url \(downloadURL)")
-                        
                         UserManager.shared.updatePhotoUrl(photoUrl: downloadURL.absoluteString)
                     }
                 }
-                
-                
-                
+        
             }
+    
             
         }else {
             print("Error getting iamge data")
